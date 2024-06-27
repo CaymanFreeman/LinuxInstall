@@ -2,7 +2,7 @@
 
 ### Get Script:
 ```
-wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.sh-O install.sh
+wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.sh -O install.sh
 ```
 
 ### Auto Run Script:
