@@ -1,5 +1,3 @@
-# LinuxInstall
-
 ## Pop! OS (22.04 LTS)
 
 ### Get Script:
