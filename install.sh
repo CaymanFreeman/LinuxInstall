@@ -49,15 +49,16 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver ['<Super>
 sudo apt -qq install nala -y
 sudo nala fetch --auto -y
 
-# Brave browser repository
+# Brave debian repository
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 
-# Gyazo for Linux repository
+# Gyazo debian repository
 sudo curl -s https://packagecloud.io/install/repositories/gyazo/gyazo-for-linux/script.deb.sh | sudo bash
 
-# Flatpak flathub remote
-flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+# Spotify debian repository
+curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 
 # Remove packages
 sudo nala remove --purge totem -y
@@ -65,20 +66,15 @@ sudo nala remove --purge firefox -y
 
 # Install packages
 sudo nala update
-sudo nala install plocate -y
-sudo nala install git -y
-sudo nala install brave-browser -y
-sudo nala install steam -y
-sudo nala install vlc -y
-sudo nala install nemo -y
-sudo nala install cosmic-store -y
-sudo nala install cosmic-term -y
-sudo nala install neofetch -y
-sudo nala install gyazo -y
+sudo nala install plocate git brave-browser steam vlc nemo cosmic-store cosmic-term neofetch gyazo spotify-client -y
 sudo nala upgrade -y
+
+# Flathub repository
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+# Install flatpaks
 flatpak update -y
-flatpak install --user io.github.milkshiift.GoofCord -y
-flatpak install --user xyz.xclicker.xclicker -y
+flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker -y
 flatpak upgrade -y
 
 # Cleanup
@@ -94,6 +90,6 @@ gsettings set org.nemo.desktop show-desktop-icons true
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
 # Set dash apps
-gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'com.system76.CosmicStore.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'com.system76.CosmicTerm.desktop', 'gyazo.desktop', 'brave-browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'xyz.xclicker.xclicker.desktop']"
+gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'com.system76.CosmicStore.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'com.system76.CosmicTerm.desktop', 'gyazo.desktop', 'brave-browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'spotify.desktop', 'xyz.xclicker.xclicker.desktop']"
 
 neofetch
