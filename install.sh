@@ -43,6 +43,7 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver ['<Super>Escape', '<Super>l']
 
 # Nala mirror setup
 sudo apt -qq install nala -y
@@ -50,16 +51,21 @@ sudo nala fetch --auto -y
 
 # Brave browser repository
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+# Gyazo for Linux repository
+sudo curl -s https://packagecloud.io/install/repositories/gyazo/gyazo-for-linux/script.deb.sh | sudo bash
 
 # Flatpak flathub remote
 flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-# Update
-sudo nala update
-flatpak update -y
+# Remove packages
+sudo nala remove --purge totem -y
+sudo nala remove --purge firefox -y
+sudo nala remove --purge pop-shop -y
 
 # Install packages
+sudo nala update
 sudo nala install plocate -y
 sudo nala install git -y
 sudo nala install brave-browser -y
@@ -69,21 +75,26 @@ sudo nala install nemo -y
 sudo nala install cosmic-store -y
 sudo nala install cosmic-term -y
 sudo nala install neofetch -y
+sudo nala install gyazo -y
+sudo nala upgrade -y
+flatpak update -y
 flatpak install --user io.github.milkshiift.GoofCord -y
 flatpak install --user xyz.xclicker.xclicker -y
-sudo nala upgrade -y
 flatpak upgrade -y
 
-# Remove packages
-sudo nala remove --purge totem -y
-sudo nala remove --purge firefox -y
-
 # Cleanup
-flatpak uninstall --unused
 sudo nala autoremove -y
 sudo nala clean
+flatpak uninstall --unused
+
+# Disable nautilus and configure nemo
+sudo mv /usr/share/applications/nautilus-autorun-software.desktop /usr/share/applications/nautilus-autorun-software.desktop.disabled
+sudo mv /usr/share/applications/org.gnome.Nautilus.desktop /usr/share/applications/org.gnome.Nautilus.desktop.disabled
+gsettings set org.gnome.desktop.background show-desktop-icons false
+gsettings set org.nemo.desktop show-desktop-icons true
+xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
 # Set dash apps
-gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'com.system76.CosmicStore.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'com.system76.CosmicTerm.desktop', 'brave-browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'xyz.xclicker.xclicker.desktop']"
+gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'com.system76.CosmicStore.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'com.system76.CosmicTerm.desktop', 'gyazo.desktop', 'brave-browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'xyz.xclicker.xclicker.desktop']"
 
 neofetch
