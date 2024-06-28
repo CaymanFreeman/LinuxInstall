@@ -62,7 +62,6 @@ flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/fl
 # Remove packages
 sudo nala remove --purge totem -y
 sudo nala remove --purge firefox -y
-sudo nala remove --purge pop-shop -y
 
 # Install packages
 sudo nala update
