@@ -21,7 +21,7 @@ gsettings set org.gnome.shell.extensions.pop-cosmic clock-alignment 'RIGHT'
 gsettings set org.gnome.shell.extensions.pop-cosmic overlay-key-action 'APPLICATIONS'
 gsettings set org.gnome.shell.extensions.pop-cosmic show-workspaces-button false
 gsettings set org.gnome.shell.extensions.pop-cosmic show-applications-button false
-gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-alignment 'START'
 gsettings set org.gnome.desktop.background color-shading-type 'solid'
 gsettings set org.gnome.desktop.background picture-options 'zoom'
 gsettings set org.gnome.desktop.background picture-uri-dark 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
@@ -32,18 +32,18 @@ gsettings set org.gnome.desktop.screensaver picture-options 'zoom'
 gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
 gsettings set org.gnome.desktop.screensaver primary-color '#000000'
 gsettings set org.gnome.desktop.screensaver secondary-color '#000000'
-gsettings set org.gnome.shell.extensions.dash-to-dock dock-alignment 'START'
 gsettings set org.gnome.desktop.privacy remove-old-trash-files true
 gsettings set org.gnome.desktop.privacy remove-old-temp-files true
 gsettings set org.gnome.desktop.privacy old-files-age 1
 gsettings set org.gnome.desktop.screensaver lock-delay 0
 gsettings set org.gnome.desktop.session idle-delay 0
 gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
-gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver ['<Super>Escape', '<Super>l']
+
 
 # Nala mirror setup
 sudo apt -qq install nala -y
@@ -80,11 +80,11 @@ flatpak upgrade -y
 # Cleanup
 sudo nala autoremove -y
 sudo nala clean
-flatpak uninstall --unused
+flatpak uninstall --unused -y
 
 # Disable nautilus and configure nemo
-sudo mv /usr/share/applications/nautilus-autorun-software.desktop /usr/share/applications/nautilus-autorun-software.desktop.disabled
-sudo mv /usr/share/applications/org.gnome.Nautilus.desktop /usr/share/applications/org.gnome.Nautilus.desktop.disabled
+[ -f /usr/share/applications/nautilus-autorun-software.desktop ] && sudo mv /usr/share/applications/nautilus-autorun-software.desktop /usr/share/applications/nautilus-autorun-software.desktop.disabled
+[ -f /usr/share/applications/org.gnome.Nautilus.desktop ] && sudo mv /usr/share/applications/org.gnome.Nautilus.desktop /usr/share/applications/org.gnome.Nautilus.desktop.disabled
 gsettings set org.gnome.desktop.background show-desktop-icons false
 gsettings set org.nemo.desktop show-desktop-icons true
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
