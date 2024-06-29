@@ -122,6 +122,6 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding" "'<Alt>F12'"
 
 # Setup replay autostart
-wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i "3s/\$/${HOME//\//\\/}\/Scripts\/start_replay.sh/" "$HOME/.config/autostart/start_replay.sh.desktop"
+wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i "3s/\$/sh ${HOME//\//\\/}\/Scripts\/start_replay.sh/" "$HOME/.config/autostart/start_replay.sh.desktop"
 
 neofetch
