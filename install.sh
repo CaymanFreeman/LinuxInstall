@@ -129,4 +129,7 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command" "'sh $HOME/Scripts/stop_replay.sh'"
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding" "'<Alt>F12'"
 
+# Start replay
+sh "$HOME/Scripts/start_replay.sh"
+
 neofetch

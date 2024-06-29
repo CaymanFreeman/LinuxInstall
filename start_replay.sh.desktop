@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Start Replay
+Name=Start Replay
+Comment[en_US]=Starts a replay recording
+Comment=Starts a replay recording
