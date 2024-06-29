@@ -129,7 +129,4 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 # Setup replay autostart
 wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i "3s/\$/${HOME//\//\\/}\/Scripts\/start_replay.sh/" "$HOME/.config/autostart/start_replay.sh.desktop"
 
-# Start replay
-sh "$HOME/Scripts/start_replay.sh"
-
 neofetch
