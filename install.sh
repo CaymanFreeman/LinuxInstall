@@ -98,7 +98,9 @@ mkdir -p "$HOME/Scripts"
 wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/save_replay.sh" -O "$HOME/Scripts/save_replay.sh"
 wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh" -O "$HOME/Scripts/start_replay.sh"
 wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/stop_replay.sh" -O "$HOME/Scripts/stop_replay.sh"
-chmod +x $HOME/Scripts/*.sh
+chmod +x "$HOME/Scripts/save_replay.sh"
+chmod +x "$HOME/Scripts/start_replay.sh"
+chmod +x "$HOME/Scripts/stop_replay.sh"
 
 # Prepare custom keyboard shortcuts
 KEYBINDINGS='[
@@ -116,17 +118,17 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/Po
 
 # Save Replay shortcut
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" "'Save Replay'"
-dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" "'$HOME/Scripts/save_replay.sh'"
+dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" "'sh $HOME/Scripts/save_replay.sh'"
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding" "'<Alt>F10'"
 
 # Start replay shortcut
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name" "'Start Replay'"
-dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command" "'$HOME/Scripts/start_replay.sh'"
+dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command" "'sh $HOME/Scripts/start_replay.sh'"
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding" "'<Alt>F11'"
 
 # Stop replay shortcut
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name" "'Stop Replay'"
-dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command" "'$HOME/Scripts/stop_replay.sh'"
+dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command" "'sh $HOME/Scripts/stop_replay.sh'"
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding" "'<Alt>F12'"
 
 neofetch
