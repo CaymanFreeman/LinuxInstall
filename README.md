@@ -7,8 +7,5 @@ wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.s
 
 ### Auto Run Script:
 ```
-wget -q https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.sh -O install.sh
-chmod +x install.sh
-./install.sh
-sudo rm install.sh
+wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.sh -O install.sh && chmod +x install.sh && ./install.sh && sudo rm install.sh
 ```
