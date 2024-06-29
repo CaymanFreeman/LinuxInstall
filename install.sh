@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Clear and sudo
-clear
 sudo -v
 
 # Determine if laptop or desktop
