@@ -93,12 +93,9 @@ gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop',
 
 # Create replay scripts
 mkdir -p "$HOME/Scripts"
-wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/save_replay.sh" -O "$HOME/Scripts/save_replay.sh"
-wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh" -O "$HOME/Scripts/start_replay.sh"
-wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/stop_replay.sh" -O "$HOME/Scripts/stop_replay.sh"
-chmod +x "$HOME/Scripts/save_replay.sh"
-chmod +x "$HOME/Scripts/start_replay.sh"
-chmod +x "$HOME/Scripts/stop_replay.sh"
+wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/save_replay.sh" -O "$HOME/Scripts/save_replay.sh" && chmod +x "$HOME/Scripts/save_replay.sh"
+wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh" -O "$HOME/Scripts/start_replay.sh" && chmod +x "$HOME/Scripts/start_replay.sh"
+wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/stop_replay.sh" -O "$HOME/Scripts/stop_replay.sh" && chmod +x "$HOME/Scripts/stop_replay.sh"
 
 # Prepare custom keyboard shortcuts
 KEYBINDINGS='[
@@ -128,6 +125,9 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name" "'Stop Replay'"
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command" "'sh $HOME/Scripts/stop_replay.sh'"
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding" "'<Alt>F12'"
+
+# Setup replay autostart
+wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i "3s/\$/${HOME//\//\\/}\/Scripts\/start_replay.sh/" "$HOME/.config/autostart/start_replay.sh.desktop"
 
 # Start replay
 sh "$HOME/Scripts/start_replay.sh"
