@@ -2,15 +2,8 @@
 
 sudo -v
 
-# Determine if laptop or desktop
-if ls /sys/class/power_supply/BAT* > /dev/null 2>&1; then
-    SYSTEM_TYPE="LAPTOP"
-else
-    SYSTEM_TYPE="DESKTOP"
-fi
-
 # Change settings
-if [ "$SYSTEM_TYPE" = "LAPTOP" ]; then
+if ls /sys/class/power_supply/BAT* > /dev/null 2>&1; then
     gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
     gsettings set org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
     gsettings set org.gnome.desktop.interface show-battery-percentage true
@@ -42,7 +35,6 @@ gsettings set org.gnome.settings-daemon.plugins.power power-saver-profile-on-low
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 
-
 # Nala mirror setup
 sudo apt -qq install nala -y
 sudo nala fetch --auto -y
@@ -62,8 +54,11 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee "/etc/apt/so
 sudo nala remove --purge totem -y
 sudo nala remove --purge firefox -y
 
-# Install packages
+# Install packages and drivers
 sudo nala update
+if lspci | grep -i nvidia > /dev/null 2>&1; then
+    sudo nala install system76-driver-nvidia -y
+fi
 sudo nala install plocate git brave-browser steam vlc nemo cosmic-store cosmic-term neofetch gyazo spotify-client libnotify-bin -y
 sudo nala upgrade -y
 
