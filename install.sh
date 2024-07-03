@@ -92,7 +92,7 @@ wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/save_rep
 wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh" -O "$HOME/Scripts/start_replay.sh" && chmod +x "$HOME/Scripts/start_replay.sh"
 wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/stop_replay.sh" -O "$HOME/Scripts/stop_replay.sh" && chmod +x "$HOME/Scripts/stop_replay.sh"
 
-# Get the highest resolution size
+# Get and set the highest resolution size
 RESOLUTIONS=$(xrandr --query | grep ' connected' | grep -oP '\d+x\d+')
 HIGHEST_RES="0x0"
 for RES in $RESOLUTIONS; do
@@ -104,9 +104,17 @@ for RES in $RESOLUTIONS; do
     HIGHEST_RES=$RES
   fi
 done
+sed -i "/VIDEO_AREA=/s/$/$HIGHEST_RES/" "$HOME/Scripts/start_replay.sh"
 
-# Set the screen size value
-sed -i '/VIDEO_AREA=/i $HIGHEST_RES' "$HOME/Scripts/start_replay.sh"
+# Get and set the video codec
+CODECS=$(flatpak run --command=gpu-screen-recorder com.dec05eba.gpu_screen_recorder --list-supported-video-codecs)
+VIDEO_CODEC='auto'
+if echo "$CODECS" | grep -q 'hevc'; then
+    VIDEO_CODEC='hevc'
+elif echo "$CODECS" | grep -q 'h264'; then
+    VIDEO_CODEC='h264'
+fi
+sed -i "/VIDEO_CODEC=/s/$/$VIDEO_CODEC/" "$HOME/Scripts/start_replay.sh"
 
 # Prepare custom keyboard shortcuts
 KEYBINDINGS='[
