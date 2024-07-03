@@ -84,3 +84,71 @@ rm ~/.local/bin/noisetorch
 rm ~/.local/share/applications/noisetorch.desktop
 rm ~/.local/share/icons/hicolor/256x256/apps/noisetorch.png 
 ```
+
+---
+
+#### OBS Settings
+Output:
+- Output Mode: **Advanced**
+- Recording:
+  - Type: **Custom Output (FFmpeg)**
+  - File path or URL: **$HOME/Videos**
+  - Generate File Name without Space: **True**
+  - Container Format: **mov**
+  - Video Bitrate: **24000 Kbps**
+  - Video Encoder: **mpeg4 - MPEG-4 part 2**
+  - Audio Bitrate: **300 Kbps**
+  - Audio Encoder: **pcm_s16le - PCM signed 16-bit little-endian**
+
+Hotkeys:
+- Start Recording: **Control + Shift + F11**
+- Stop Recording: **Control + Shift + F12**
+
+Advanced:
+- Overwrite if file exists: **True**
+
+---
+
+#### Steam Launcher Settings
+Interface:
+- Start Up Location: **Library**
+
+Downloads:
+- Schedule auto-updates: **True**
+- Display download rates in bits per second: **False**
+
+Compatibility:
+- Enable Steam Play for all other titles: **True**
+- Run other titles with: **Proton Experimental**
+
+---
+
+#### Brave Browser Settings
+Customize Dashboard:
+- Background Image:
+  - Show Sponsored Images: **False**
+- Brave Stats:
+  - Show Brave Stats: **False**
+- Top Sites:
+  - Top Sites: **False**
+- Cards:
+  - Cards: **False**
+
+Settings:
+- Appearance:
+  - Show Brave News button: **False**
+  - Show Brave Rewards button: **False**
+  - Show Brave Wallet button: **False**
+  - Show Sidebar button: **False**
+  - Use wide address bar: **True**
+  - Always show full URLs: **True**
+  - Show tab search button: **False**
+
+  
+- Leo:
+  - Show Leo icon in the sidebar: **False**
+  - Show Leo in the context menu on websites: **False**
+
+  
+- System:
+  - Memory Saver: **True**
