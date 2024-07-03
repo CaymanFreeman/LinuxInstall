@@ -114,12 +114,12 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 # Start replay shortcut
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name" "'Start Replay'"
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command" "'sh $HOME/Scripts/start_replay.sh'"
-dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding" "'<Alt>F11'"
+dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding" "'<Primary><Shift>F11'"
 
 # Stop replay shortcut
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name" "'Stop Replay'"
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command" "'sh $HOME/Scripts/stop_replay.sh'"
-dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding" "'<Alt>F12'"
+dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding" "'<Primary><Shift>F12'"
 
 # Setup replay autostart
 wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i "3s/\$/sh ${HOME//\//\\/}\/Scripts\/start_replay.sh/" "$HOME/.config/autostart/start_replay.sh.desktop"
