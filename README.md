@@ -18,7 +18,7 @@ wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/noisetorc
 
 ### Auto-Run NoiseTorch Install Script:
 ```
-wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/noisetorch_install.sh -O noisetorch_install.sh && chmod +x noisetorch_install.sh && ./noisetorch_install.sh && sudo rm noisetorch_install
+wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/noisetorch_install.sh -O noisetorch_install.sh && chmod +x noisetorch_install.sh && ./noisetorch_install.sh && sudo rm noisetorch_install.sh
 ```
 
 ### Uninstall NoiseTorch
