@@ -67,7 +67,7 @@ flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo
 
 # Install flatpaks
 flatpak update -y
-flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio -y
+flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher -y
 flatpak install --system com.dec05eba.gpu_screen_recorder -y
 flatpak upgrade -y
 
@@ -92,7 +92,7 @@ gsettings set org.nemo.desktop show-desktop-icons true
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
 # Set dash apps
-gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'brave-browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'spotify.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop', 'noisetorch.desktop']"
+gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'brave-browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'com.atlauncher.ATLauncher.desktop', 'spotify.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop', 'noisetorch.desktop']"
 
 # Create replay scripts
 mkdir -p "$HOME/Scripts"
