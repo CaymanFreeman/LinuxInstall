@@ -1,11 +1,11 @@
 ## Built For Pop! OS (22.04 LTS)
 
-### Get Main Script:
+#### Get Install Script:
 ```
 wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.sh -O install.sh
 ```
 
-### Auto-Run Main Script:
+#### Auto-Run Install Script:
 ```
 wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.sh -O install.sh && chmod +x install.sh && ./install.sh && sudo rm install.sh
 ```
@@ -28,6 +28,12 @@ sudo nala remove vlc -y
 #### Uninstall Nemo
 ```
 sudo nala remove nemo -y
+[ -f "/usr/share/applications/nemo.desktop.disabled" ] && sudo mv "/usr/share/applications/nemo.desktop.disabled" "/usr/share/applications/nemo.desktop"
+[ -f "/usr/share/applications/nautilus-autorun-software.desktop.disabled" ] && sudo mv "/usr/share/applications/nautilus-autorun-software.desktop.disabled" "/usr/share/applications/nautilus-autorun-software.desktop"
+[ -f "/usr/share/applications/org.gnome.Nautilus.desktop.disabled" ] && sudo mv "/usr/share/applications/org.gnome.Nautilus.desktop.disabled" "/usr/share/applications/org.gnome.Nautilus.desktop"
+gsettings set org.gnome.desktop.background show-desktop-icons true
+gsettings set org.nemo.desktop show-desktop-icons false
+xdg-mime default org.gnome.Nautilus.desktop inode/directory application/x-gnome-saved-search
 ```
 
 #### Uninstall Neofetch
@@ -70,18 +76,6 @@ rm "$HOME/Scripts/start_replay.sh"
 rmdir "$HOME/Scripts" 2> /dev/null
 rm "$HOME/.config/autostart/start_replay.sh.desktop"
 # Keyboard shortcuts can be removed in the Settings application
-```
-
----
-
-### Get NoiseTorch Install Script:
-```
-wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/noisetorch_install.sh -O noisetorch_install.sh
-```
-
-### Auto-Run NoiseTorch Install Script:
-```
-wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/noisetorch_install.sh -O noisetorch_install.sh && chmod +x noisetorch_install.sh && ./noisetorch_install.sh && sudo rm noisetorch_install.sh
 ```
 
 #### Uninstall NoiseTorch
