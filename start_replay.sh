@@ -29,7 +29,7 @@ AUDIO_BITRATE=128000
 # This will record the current focused application (not the monitor, just the application)
 WINDOW_ID=focused
 # Required if the window ID is `focused`, add `-s $VIDEO_AREA` to the command flags if using, remove otherwise
-VIDEO_AREA=1920x1080 # This should be the size of your highest-resolution monitor (e.g. 1920x1080, 2560x1440, 3840x2160)
+VIDEO_AREA=
 
 # Run `pactl list short sources && pactl list short sinks` to see your audio inputs/outputs
 # This is an example of an output (Logitech G Pro X Headphones via USB)
