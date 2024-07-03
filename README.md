@@ -20,3 +20,10 @@ wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/noisetorc
 ```
 wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/noisetorch_install.sh -O noisetorch_install.sh && chmod +x noisetorch_install.sh && ./noisetorch_install.sh && sudo rm noisetorch_install
 ```
+
+### Uninstall NoiseTorch
+```
+rm ~/.local/bin/noisetorch
+rm ~/.local/share/applications/noisetorch.desktop
+rm ~/.local/share/icons/hicolor/256x256/apps/noisetorch.png 
+```
