@@ -66,6 +66,11 @@ flatpak remove xyz.xclicker.xclicker -y
 flatpak remove com.obsproject.Studio -y
 ```
 
+#### Uninstall ATLauncher
+```
+flatpak remove com.atlauncher.ATLauncher -y
+```
+
 #### Uninstall GPU-Screen-Recorder
 ##### (Keyboard shortcuts can be removed in the Settings application)
 ```
