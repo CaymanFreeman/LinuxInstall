@@ -10,7 +10,7 @@ ORGANIZE_IN_DATED_FOLDERS=no
 RECORD_CURSOR=yes
 REPLAY_LENGTH_SECONDS=90
 CONTAINER_FORMAT=mp4
-VIDEO_CODEC=hevc
+VIDEO_CODEC=
 QUALITY=very_high
 COLOR_RANGE=limited
 FRAME_RATE=60
@@ -55,4 +55,4 @@ AUDIO_TRACK="$(pactl get-default-sink).monitor|$(pactl get-default-source)"
     fi
 ) &
 
-mkdir -p "$VIDEO_PATH" && flatpak run --command=gpu-screen-recorder com.dec05eba.gpu_screen_recorder -w $WINDOW_ID -s $VIDEO_AREA -mf $ORGANIZE_IN_DATED_FOLDERS -cursor $RECORD_CURSOR -c $CONTAINER_FORMAT -f $FRAME_RATE -fm $FRAME_RATE_MODE -keyint $KEY_FRAME_INTERVAL_SECONDS -q $QUALITY -cr $COLOR_RANGE -r $REPLAY_LENGTH_SECONDS -k $VIDEO_CODEC -ac $AUDIO_CODEC -ab $AUDIO_BITRATE -a $AUDIO_TRACK -o "$VIDEO_PATH"; notify-send -t 1500 -u normal -- "GPU Screen Recorder" "Replay stopped"
+mkdir -p "$VIDEO_PATH" && flatpak run --command=gpu-screen-recorder com.dec05eba.gpu_screen_recorder -w $WINDOW_ID -s $VIDEO_AREA -mf $ORGANIZE_IN_DATED_FOLDERS -cursor $RECORD_CURSOR -c $CONTAINER_FORMAT -f $FRAME_RATE -fm $FRAME_RATE_MODE -keyint $KEY_FRAME_INTERVAL_SECONDS -q $QUALITY -cr $COLOR_RANGE -r $REPLAY_LENGTH_SECONDS -k $VIDEO_CODEC -ac $AUDIO_CODEC -ab $AUDIO_BITRATE -a $AUDIO_TRACK -o "$VIDEO_PATH" && notify-send -t 1500 -u normal -- "GPU Screen Recorder" "Replay stopped"
