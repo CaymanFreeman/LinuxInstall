@@ -59,7 +59,7 @@ sudo nala update
 if lspci | grep -i nvidia > /dev/null 2>&1; then
     sudo nala install system76-driver-nvidia -y
 fi
-sudo nala install plocate git brave-browser steam vlc nemo cosmic-store cosmic-term neofetch gyazo spotify-client libnotify-bin -y
+sudo nala install plocate git brave-browser steam vlc nemo neofetch gyazo spotify-client libnotify-bin -y
 sudo nala upgrade -y
 
 # Flathub repository
@@ -67,7 +67,7 @@ flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo
 
 # Install flatpaks
 flatpak update -y
-flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker -y
+flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio -y
 flatpak install --system com.dec05eba.gpu_screen_recorder -y
 flatpak upgrade -y
 
@@ -84,7 +84,7 @@ gsettings set org.nemo.desktop show-desktop-icons true
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
 # Set dash apps
-gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'com.system76.CosmicStore.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'com.system76.CosmicTerm.desktop', 'gyazo.desktop', 'brave-browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'spotify.desktop', 'xyz.xclicker.xclicker.desktop']"
+gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'brave-browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'spotify.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop']"
 
 # Create replay scripts
 mkdir -p "$HOME/Scripts"
