@@ -92,6 +92,22 @@ wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/save_rep
 wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh" -O "$HOME/Scripts/start_replay.sh" && chmod +x "$HOME/Scripts/start_replay.sh"
 wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/stop_replay.sh" -O "$HOME/Scripts/stop_replay.sh" && chmod +x "$HOME/Scripts/stop_replay.sh"
 
+# Get the highest resolution size
+RESOLUTIONS=$(xrandr --query | grep ' connected' | grep -oP '\d+x\d+')
+HIGHEST_RES="0x0"
+for RES in $RESOLUTIONS; do
+  WIDTH=${RES%x*}
+  HEIGHT=${RES#*x}
+  HIGHEST_WIDTH=${HIGHEST_RES%x*}
+  HIGHEST_HEIGHT=${HIGHEST_RES#*x}
+  if (( WIDTH > HIGHEST_WIDTH )) || { (( WIDTH == HIGHEST_WIDTH )); (( HEIGHT > HIGHEST_HEIGHT )); }; then
+    HIGHEST_RES=$RES
+  fi
+done
+
+# Set the screen size value
+sed -i '/VIDEO_AREA=/i $HIGHEST_RES' "$HOME/Scripts/start_replay.sh"
+
 # Prepare custom keyboard shortcuts
 KEYBINDINGS='[
   "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/PopLaunch1/",
@@ -122,6 +138,6 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding" "'<Primary><Shift>F12'"
 
 # Setup replay autostart
-wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i "3s/\$/sh ${HOME//\//\\/}\/Scripts\/start_replay.sh/" "$HOME/.config/autostart/start_replay.sh.desktop"
+wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i '/Exec=/s/$/sh '${HOME//\//\\/}'\/Scripts\/start_replay.sh/' "$HOME/.config/autostart/start_replay.sh.desktop"
 
 neofetch
