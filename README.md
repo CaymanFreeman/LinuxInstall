@@ -67,6 +67,7 @@ flatpak remove com.obsproject.Studio -y
 ```
 
 #### Uninstall GPU-Screen-Recorder
+##### (Keyboard shortcuts can be removed in the Settings application)
 ```
 sh "$HOME/Scripts/stop_replay.sh"
 flatpak remove com.dec05eba.gpu_screen_recorder -y
@@ -75,7 +76,6 @@ rm "$HOME/Scripts/stop_replay.sh"
 rm "$HOME/Scripts/start_replay.sh"
 rmdir "$HOME/Scripts" 2> /dev/null
 rm "$HOME/.config/autostart/start_replay.sh.desktop"
-# Keyboard shortcuts can be removed in the Settings application
 ```
 
 #### Uninstall NoiseTorch
