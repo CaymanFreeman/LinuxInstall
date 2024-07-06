@@ -45,10 +45,6 @@ sudo nala fetch --auto -y
 # Gyazo debian repository
 sudo curl -s "https://packagecloud.io/install/repositories/gyazo/gyazo-for-linux/script.deb.sh" | sudo bash
 
-# Spotify debian repository
-curl -sS "https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg" | sudo gpg --dearmor --yes -o "/etc/apt/trusted.gpg.d/spotify.gpg"
-echo "deb http://repository.spotify.com stable non-free" | sudo tee "/etc/apt/sources.list.d/spotify.list"
-
 # Remove packages
 sudo nala remove --purge totem -y
 sudo nala remove --purge firefox -y
@@ -58,7 +54,7 @@ sudo nala update
 if lspci | grep -i nvidia > /dev/null 2>&1; then
     sudo nala install system76-driver-nvidia -y
 fi
-sudo nala install plocate git steam vlc nemo neofetch gyazo spotify-client libnotify-bin -y
+sudo nala install plocate git steam vlc nemo neofetch gyazo libnotify-bin -y
 sudo nala upgrade -y
 
 # Install flatpaks
@@ -74,7 +70,7 @@ else
     flatpak remote-add --if-not-exists --user flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
     flatpak install --user com.dec05eba.gpu_screen_recorder -y
 fi
-flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher com.brave.Browser -y
+flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher com.brave.Browser com.spotify.Client -y
 flatpak upgrade -y
 
 # Install NoiseTorch
@@ -101,7 +97,7 @@ gsettings set org.nemo.desktop show-desktop-icons true
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
 # Set dash apps
-gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'com.brave.Browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'com.atlauncher.ATLauncher.desktop', 'spotify.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop', 'noisetorch.desktop']"
+gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'com.brave.Browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'com.atlauncher.ATLauncher.desktop', 'com.spotify.Client.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop', 'noisetorch.desktop']"
 
 # Create replay scripts
 mkdir -p "$HOME/Scripts"
