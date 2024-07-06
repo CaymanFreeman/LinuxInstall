@@ -8,42 +8,37 @@ sudo -v
 
 # Change settings
 if ls /sys/class/power_supply/BAT* > /dev/null 2>&1; then
-    gsettings set-from-string << EOF
-    org.gnome.desktop.peripherals.touchpad natural-scroll true
-    org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
-    org.gnome.desktop.interface show-battery-percentage true
-EOF
+    gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+    gsettings set org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
+    gsettings set org.gnome.desktop.interface show-battery-percentage true
 fi
-
-gsettings set-from-string << EOF
-org.gnome.shell.extensions.pop-cosmic clock-alignment 'RIGHT'
-org.gnome.shell.extensions.pop-cosmic overlay-key-action 'APPLICATIONS'
-org.gnome.shell.extensions.pop-cosmic show-workspaces-button false
-org.gnome.shell.extensions.pop-cosmic show-applications-button false
-org.gnome.shell.extensions.dash-to-dock dock-alignment 'START'
-org.gnome.shell.extensions.dash-to-dock show-mounts false
-org.gnome.desktop.background color-shading-type 'solid'
-org.gnome.desktop.background picture-options 'zoom'
-org.gnome.desktop.background picture-uri-dark 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
-org.gnome.desktop.background primary-color '#000000'
-org.gnome.desktop.background secondary-color '#000000'
-org.gnome.desktop.screensaver color-shading-type 'solid'
-org.gnome.desktop.screensaver picture-options 'zoom'
-org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
-org.gnome.desktop.screensaver primary-color '#000000'
-org.gnome.desktop.screensaver secondary-color '#000000'
-org.gnome.desktop.privacy remove-old-trash-files true
-org.gnome.desktop.privacy remove-old-temp-files true
-org.gnome.desktop.privacy old-files-age 1
-org.gnome.desktop.screensaver lock-delay 0
-org.gnome.desktop.session idle-delay 0
-org.gnome.desktop.screensaver lock-enabled false
-org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
-org.gnome.settings-daemon.plugins.power idle-dim false
-org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
-org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
-org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
-EOF
+gsettings set org.gnome.shell.extensions.pop-cosmic clock-alignment 'RIGHT'
+gsettings set org.gnome.shell.extensions.pop-cosmic overlay-key-action 'APPLICATIONS'
+gsettings set org.gnome.shell.extensions.pop-cosmic show-workspaces-button false
+gsettings set org.gnome.shell.extensions.pop-cosmic show-applications-button false
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-alignment 'START'
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
+gsettings set org.gnome.desktop.background color-shading-type 'solid'
+gsettings set org.gnome.desktop.background picture-options 'zoom'
+gsettings set org.gnome.desktop.background picture-uri-dark 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
+gsettings set org.gnome.desktop.background primary-color '#000000'
+gsettings set org.gnome.desktop.background secondary-color '#000000'
+gsettings set org.gnome.desktop.screensaver color-shading-type 'solid'
+gsettings set org.gnome.desktop.screensaver picture-options 'zoom'
+gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
+gsettings set org.gnome.desktop.screensaver primary-color '#000000'
+gsettings set org.gnome.desktop.screensaver secondary-color '#000000'
+gsettings set org.gnome.desktop.privacy remove-old-trash-files true
+gsettings set org.gnome.desktop.privacy remove-old-temp-files true
+gsettings set org.gnome.desktop.privacy old-files-age 1
+gsettings set org.gnome.desktop.screensaver lock-delay 0
+gsettings set org.gnome.desktop.session idle-delay 0
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
+gsettings set org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 
 # Nala mirror setup
 sudo apt-get -qq install nala -y
