@@ -10,11 +10,6 @@ wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.s
 wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.sh -O install.sh && chmod +x install.sh && ./install.sh && sudo rm install.sh
 ```
 
-#### Uninstall Brave Browser
-```
-sudo nala remove brave-browser -y
-```
-
 #### Uninstall Steam Launcher
 ```
 sudo nala remove steam -y
@@ -69,6 +64,11 @@ flatpak remove com.obsproject.Studio -y
 #### Uninstall ATLauncher
 ```
 flatpak remove com.atlauncher.ATLauncher -y
+```
+
+#### Uninstall Brave Browser
+```
+flatpak remove com.brave.Browser -y
 ```
 
 #### Uninstall GPU-Screen-Recorder
@@ -148,7 +148,7 @@ Settings:
   - Use wide address bar: **True**
   - Always show full URLs: **True**
   - Show tab search button: **False**
-
+  - Show sidebar: **Never**
   
 - Leo:
   - Show Leo icon in the sidebar: **False**
