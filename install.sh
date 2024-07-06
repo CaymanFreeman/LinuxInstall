@@ -175,7 +175,6 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 # Setup replay autostart
 mkdir -p "$HOME/.config/autostart" && wget "$REPOSITORY_URL/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i '/Exec=/s/$/sh '${HOME//\//\\/}'\/Scripts\/start_replay.sh/' "$HOME/.config/autostart/start_replay.sh.desktop"
 
-tput ed
 neofetch
 
 echo "It is now highly recommended that you restart your system"
