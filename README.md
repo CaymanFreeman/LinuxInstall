@@ -22,13 +22,13 @@ sudo nala remove vlc -y
 
 #### Uninstall Nemo
 ```
-sudo nala remove nemo -y
 [ -f "/usr/share/applications/nemo.desktop.disabled" ] && sudo mv "/usr/share/applications/nemo.desktop.disabled" "/usr/share/applications/nemo.desktop"
 [ -f "/usr/share/applications/nautilus-autorun-software.desktop.disabled" ] && sudo mv "/usr/share/applications/nautilus-autorun-software.desktop.disabled" "/usr/share/applications/nautilus-autorun-software.desktop"
 [ -f "/usr/share/applications/org.gnome.Nautilus.desktop.disabled" ] && sudo mv "/usr/share/applications/org.gnome.Nautilus.desktop.disabled" "/usr/share/applications/org.gnome.Nautilus.desktop"
 gsettings set org.gnome.desktop.background show-desktop-icons true
 gsettings set org.nemo.desktop show-desktop-icons false
 xdg-mime default org.gnome.Nautilus.desktop inode/directory application/x-gnome-saved-search
+sudo nala remove nemo -y
 ```
 
 #### Uninstall Neofetch
@@ -75,12 +75,12 @@ flatpak remove com.brave.Browser -y
 ##### (Keyboard shortcuts can be removed in the Settings application)
 ```
 sh "$HOME/Scripts/stop_replay.sh"
-flatpak remove com.dec05eba.gpu_screen_recorder -y
 rm "$HOME/Scripts/save_replay.sh"
 rm "$HOME/Scripts/stop_replay.sh"
 rm "$HOME/Scripts/start_replay.sh"
 rmdir "$HOME/Scripts" 2> /dev/null
 rm "$HOME/.config/autostart/start_replay.sh.desktop"
+flatpak remove com.dec05eba.gpu_screen_recorder -y
 ```
 
 #### Uninstall NoiseTorch
