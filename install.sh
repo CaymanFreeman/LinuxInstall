@@ -39,10 +39,6 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'no
 sudo apt -qq install nala -y
 sudo nala fetch --auto -y
 
-# Brave debian repository
-sudo curl -fsSLo "/usr/share/keyrings/brave-browser-archive-keyring.gpg" "https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg"
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee "/etc/apt/sources.list.d/brave-browser-release.list"
-
 # Gyazo debian repository
 sudo curl -s "https://packagecloud.io/install/repositories/gyazo/gyazo-for-linux/script.deb.sh" | sudo bash
 
@@ -59,7 +55,7 @@ sudo nala update
 if lspci | grep -i nvidia > /dev/null 2>&1; then
     sudo nala install system76-driver-nvidia -y
 fi
-sudo nala install plocate git brave-browser steam vlc nemo neofetch gyazo spotify-client libnotify-bin -y
+sudo nala install plocate git steam vlc nemo neofetch gyazo spotify-client libnotify-bin -y
 sudo nala upgrade -y
 
 # Flathub repository
@@ -67,7 +63,7 @@ flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo
 
 # Install flatpaks
 flatpak update -y
-flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher -y
+flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher com.brave.Browser -y
 flatpak install --system com.dec05eba.gpu_screen_recorder -y
 flatpak upgrade -y
 
