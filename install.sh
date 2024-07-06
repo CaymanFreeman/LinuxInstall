@@ -60,10 +60,10 @@ sudo nala upgrade -y
 # Install flatpaks
 flatpak update -y
 GPU_VENDORS=$(lspci | grep VGA | cut -d ' ' -f5)
-if [[ "$GPU_VENDORS" == *"NVIDIA"* ]] || [[ "$GPU_VENDORS" == *"AMD"* ]]; then
+if [ "$GPU_VENDORS" = *"NVIDIA"* ] || [ "$GPU_VENDORS" = *"AMD"* ]; then
     flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
     flatpak install --system com.dec05eba.gpu_screen_recorder -y
-elif [[ "$GPU_VENDORS" == *"Intel"* ]] && [[ "$GPU_VENDORS" != *"NVIDIA"* ]] && [[ "$GPU_VENDORS" != *"AMD"* ]]; then
+elif [ "$GPU_VENDORS" = *"Intel"* ] && [ "$GPU_VENDORS" != *"NVIDIA"* ] && [ "$GPU_VENDORS" != *"AMD"* ]; then
     flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
     flatpak install --system com.dec05eba.gpu_screen_recorder -y
 else
@@ -81,13 +81,16 @@ cd "$HOME/Downloads" && curl -JLO $DOWNLOAD_URL && tar -C $HOME -h -xzf $ASSET_N
 sudo setcap 'CAP_SYS_RESOURCE=+ep' "$HOME/.local/bin/noisetorch"
 gtk-update-icon-cache
 
+# Set dash apps
+gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'com.brave.Browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'com.atlauncher.ATLauncher.desktop', 'com.spotify.Client.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop', 'noisetorch.desktop']"
+
 # Cleanup
 sudo nala autoremove -y
 sudo nala clean
 flatpak uninstall --unused -y
 
 # Disable Invidious in Goofcord
-mv "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js" "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js.disabled"
+[ -f "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js" ] && mv "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js" "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js.disabled"
 
 # Disable nautilus and configure nemo
 [ -f "/usr/share/applications/nautilus-autorun-software.desktop" ] && sudo mv "/usr/share/applications/nautilus-autorun-software.desktop" "/usr/share/applications/nautilus-autorun-software.desktop.disabled"
@@ -96,11 +99,13 @@ gsettings set org.gnome.desktop.background show-desktop-icons false
 gsettings set org.nemo.desktop show-desktop-icons true
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
-# Set dash apps
-gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'com.brave.Browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'com.atlauncher.ATLauncher.desktop', 'com.spotify.Client.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop', 'noisetorch.desktop']"
+# GPU-Screen-Recorder OC optimization
+if [ $GPU_VENDORS = *"NVIDIA"* ]; then
+    sudo nvidia-xconfig --cool-bits=12
+fi
 
 # GPU-Screen-Recorder CUDA fix
-if [[ $GPU_VENDORS == *"NVIDIA"* ]]; then
+if [ $GPU_VENDORS = *"NVIDIA"* ]; then
     sudo nala install nvidia-cuda-toolkit -y
 fi
 CUDA=$(nvcc -V)
@@ -173,3 +178,5 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 mkdir -p "$HOME/.config/autostart" && wget "$REPOSITORY_URL/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i '/Exec=/s/$/sh '${HOME//\//\\/}'\/Scripts\/start_replay.sh/' "$HOME/.config/autostart/start_replay.sh.desktop"
 
 neofetch
+
+echo "It is now highly recommended that you restart your system"
