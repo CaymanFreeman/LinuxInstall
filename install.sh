@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 REPOSITORY_URL='https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main'
 
 sudo -v
