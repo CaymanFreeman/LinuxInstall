@@ -61,13 +61,20 @@ fi
 sudo nala install plocate git steam vlc nemo neofetch gyazo spotify-client libnotify-bin -y
 sudo nala upgrade -y
 
-# Flathub repository
-flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
-
 # Install flatpaks
 flatpak update -y
+GPU_VENDORS=$(lspci | grep VGA | cut -d ' ' -f5)
+if [[ "$GPU_VENDORS" == *"NVIDIA"* ]] || [[ "$GPU_VENDORS" == *"AMD"* ]]; then
+    flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
+    flatpak install --system com.dec05eba.gpu_screen_recorder -y
+elif [[ "$GPU_VENDORS" == *"Intel"* ]] && [[ "$GPU_VENDORS" != *"NVIDIA"* ]] && [[ "$GPU_VENDORS" != *"AMD"* ]]; then
+    flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
+    flatpak install --system com.dec05eba.gpu_screen_recorder -y
+else
+    flatpak remote-add --if-not-exists --user flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
+    flatpak install --user com.dec05eba.gpu_screen_recorder -y
+fi
 flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher com.brave.Browser -y
-flatpak install --system com.dec05eba.gpu_screen_recorder -y
 flatpak upgrade -y
 
 # Install NoiseTorch
@@ -82,6 +89,9 @@ gtk-update-icon-cache
 sudo nala autoremove -y
 sudo nala clean
 flatpak uninstall --unused -y
+
+# Disable Invidious in Goofcord
+mv "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js" "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js.disabled"
 
 # Disable nautilus and configure nemo
 [ -f "/usr/share/applications/nautilus-autorun-software.desktop" ] && sudo mv "/usr/share/applications/nautilus-autorun-software.desktop" "/usr/share/applications/nautilus-autorun-software.desktop.disabled"
