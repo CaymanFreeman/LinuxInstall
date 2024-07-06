@@ -1,5 +1,7 @@
 #!/bin/bash
 
+REPOSITORY_URL='https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main'
+
 sudo -v
 
 # Change settings
@@ -93,9 +95,9 @@ gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop',
 
 # Create replay scripts
 mkdir -p "$HOME/Scripts"
-wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/save_replay.sh" -O "$HOME/Scripts/save_replay.sh" && chmod +x "$HOME/Scripts/save_replay.sh"
-wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh" -O "$HOME/Scripts/start_replay.sh" && chmod +x "$HOME/Scripts/start_replay.sh"
-wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/stop_replay.sh" -O "$HOME/Scripts/stop_replay.sh" && chmod +x "$HOME/Scripts/stop_replay.sh"
+wget "$REPOSITORY_URL/save_replay.sh" -O "$HOME/Scripts/save_replay.sh" && chmod +x "$HOME/Scripts/save_replay.sh"
+wget "$REPOSITORY_URL/start_replay.sh" -O "$HOME/Scripts/start_replay.sh" && chmod +x "$HOME/Scripts/start_replay.sh"
+wget "$REPOSITORY_URL/stop_replay.sh" -O "$HOME/Scripts/stop_replay.sh" && chmod +x "$HOME/Scripts/stop_replay.sh"
 
 # Get and set the highest resolution size
 RESOLUTIONS=$(xrandr --query | grep ' connected' | grep -oP '\d+x\d+')
@@ -151,6 +153,6 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding" "'<Primary><Shift>F12'"
 
 # Setup replay autostart
-wget "https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i '/Exec=/s/$/sh '${HOME//\//\\/}'\/Scripts\/start_replay.sh/' "$HOME/.config/autostart/start_replay.sh.desktop"
+mkdir -p "$HOME/.config/autostart" && wget "$REPOSITORY_URL/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i '/Exec=/s/$/sh '${HOME//\//\\/}'\/Scripts\/start_replay.sh/' "$HOME/.config/autostart/start_replay.sh.desktop"
 
 neofetch
