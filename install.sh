@@ -1,53 +1,59 @@
 #!/bin/bash
 
+set -e
+
 REPOSITORY_URL='https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main'
 
 sudo -v
 
 # Change settings
 if ls /sys/class/power_supply/BAT* > /dev/null 2>&1; then
-    gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
-    gsettings set org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
-    gsettings set org.gnome.desktop.interface show-battery-percentage true
+    gsettings set-from-string << EOF
+    org.gnome.desktop.peripherals.touchpad natural-scroll true
+    org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
+    org.gnome.desktop.interface show-battery-percentage true
+EOF
 fi
-gsettings set org.gnome.shell.extensions.pop-cosmic clock-alignment 'RIGHT'
-gsettings set org.gnome.shell.extensions.pop-cosmic overlay-key-action 'APPLICATIONS'
-gsettings set org.gnome.shell.extensions.pop-cosmic show-workspaces-button false
-gsettings set org.gnome.shell.extensions.pop-cosmic show-applications-button false
-gsettings set org.gnome.shell.extensions.dash-to-dock dock-alignment 'START'
-gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
-gsettings set org.gnome.desktop.background color-shading-type 'solid'
-gsettings set org.gnome.desktop.background picture-options 'zoom'
-gsettings set org.gnome.desktop.background picture-uri-dark 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
-gsettings set org.gnome.desktop.background primary-color '#000000'
-gsettings set org.gnome.desktop.background secondary-color '#000000'
-gsettings set org.gnome.desktop.screensaver color-shading-type 'solid'
-gsettings set org.gnome.desktop.screensaver picture-options 'zoom'
-gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
-gsettings set org.gnome.desktop.screensaver primary-color '#000000'
-gsettings set org.gnome.desktop.screensaver secondary-color '#000000'
-gsettings set org.gnome.desktop.privacy remove-old-trash-files true
-gsettings set org.gnome.desktop.privacy remove-old-temp-files true
-gsettings set org.gnome.desktop.privacy old-files-age 1
-gsettings set org.gnome.desktop.screensaver lock-delay 0
-gsettings set org.gnome.desktop.session idle-delay 0
-gsettings set org.gnome.desktop.screensaver lock-enabled false
-gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
-gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
-gsettings set org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
-gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
-gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+
+gsettings set-from-string << EOF
+org.gnome.shell.extensions.pop-cosmic clock-alignment 'RIGHT'
+org.gnome.shell.extensions.pop-cosmic overlay-key-action 'APPLICATIONS'
+org.gnome.shell.extensions.pop-cosmic show-workspaces-button false
+org.gnome.shell.extensions.pop-cosmic show-applications-button false
+org.gnome.shell.extensions.dash-to-dock dock-alignment 'START'
+org.gnome.shell.extensions.dash-to-dock show-mounts false
+org.gnome.desktop.background color-shading-type 'solid'
+org.gnome.desktop.background picture-options 'zoom'
+org.gnome.desktop.background picture-uri-dark 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
+org.gnome.desktop.background primary-color '#000000'
+org.gnome.desktop.background secondary-color '#000000'
+org.gnome.desktop.screensaver color-shading-type 'solid'
+org.gnome.desktop.screensaver picture-options 'zoom'
+org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
+org.gnome.desktop.screensaver primary-color '#000000'
+org.gnome.desktop.screensaver secondary-color '#000000'
+org.gnome.desktop.privacy remove-old-trash-files true
+org.gnome.desktop.privacy remove-old-temp-files true
+org.gnome.desktop.privacy old-files-age 1
+org.gnome.desktop.screensaver lock-delay 0
+org.gnome.desktop.session idle-delay 0
+org.gnome.desktop.screensaver lock-enabled false
+org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+org.gnome.settings-daemon.plugins.power idle-dim false
+org.gnome.settings-daemon.plugins.power power-saver-profile-on-low-battery false
+org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
+org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+EOF
 
 # Nala mirror setup
-sudo apt -qq install nala -y
+sudo apt-get -qq install nala -y
 sudo nala fetch --auto -y
 
 # Gyazo debian repository
 sudo curl -s "https://packagecloud.io/install/repositories/gyazo/gyazo-for-linux/script.deb.sh" | sudo bash
 
 # Remove packages
-sudo nala remove --purge totem -y
-sudo nala remove --purge firefox -y
+sudo nala remove --purge totem firefox -y
 
 # Install packages and drivers
 sudo nala update
@@ -60,10 +66,10 @@ sudo nala upgrade -y
 # Install flatpaks
 flatpak update -y
 GPU_VENDORS=$(lspci | grep VGA | cut -d ' ' -f5)
-if [ "$GPU_VENDORS" = *"NVIDIA"* ] || [ "$GPU_VENDORS" = *"AMD"* ]; then
+if [[ "$GPU_VENDORS" = *"NVIDIA"* ]] || [[ "$GPU_VENDORS" = *"AMD"* ]]; then
     flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
     flatpak install --system com.dec05eba.gpu_screen_recorder -y
-elif [ "$GPU_VENDORS" = *"Intel"* ] && [ "$GPU_VENDORS" != *"NVIDIA"* ] && [ "$GPU_VENDORS" != *"AMD"* ]; then
+elif [[ "$GPU_VENDORS" = *"Intel"* ]] && [[ "$GPU_VENDORS" != *"NVIDIA"* ]] && [[ "$GPU_VENDORS" != *"AMD"* ]]; then
     flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
     flatpak install --system com.dec05eba.gpu_screen_recorder -y
 else
@@ -90,26 +96,25 @@ sudo nala clean
 flatpak uninstall --unused -y
 
 # Disable Invidious in Goofcord
-[ -f "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js" ] && mv "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js" "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js.disabled"
+[[ -f "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js" ]] && mv "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js" "$HOME/.var/app/io.github.milkshiift.GoofCord/config/goofcord/scripts/14_invidiousEmbeds.js.disabled"
 
 # Disable nautilus and configure nemo
-[ -f "/usr/share/applications/nautilus-autorun-software.desktop" ] && sudo mv "/usr/share/applications/nautilus-autorun-software.desktop" "/usr/share/applications/nautilus-autorun-software.desktop.disabled"
-[ -f "/usr/share/applications/org.gnome.Nautilus.desktop" ] && sudo mv "/usr/share/applications/org.gnome.Nautilus.desktop" "/usr/share/applications/org.gnome.Nautilus.desktop.disabled"
+[[ -f "/usr/share/applications/nautilus-autorun-software.desktop" ]] && sudo mv "/usr/share/applications/nautilus-autorun-software.desktop" "/usr/share/applications/nautilus-autorun-software.desktop.disabled"
+[[ -f "/usr/share/applications/org.gnome.Nautilus.desktop" ]] && sudo mv "/usr/share/applications/org.gnome.Nautilus.desktop" "/usr/share/applications/org.gnome.Nautilus.desktop.disabled"
 gsettings set org.gnome.desktop.background show-desktop-icons false
 gsettings set org.nemo.desktop show-desktop-icons true
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
 # GPU-Screen-Recorder OC optimization
-if [ $GPU_VENDORS = *"NVIDIA"* ]; then
+if [[ $GPU_VENDORS = *"NVIDIA"* ]]; then
     sudo nvidia-xconfig --cool-bits=12
 fi
 
 # GPU-Screen-Recorder CUDA fix
-if [ $GPU_VENDORS = *"NVIDIA"* ]; then
+if [[ $GPU_VENDORS = *"NVIDIA"* ]]; then
     sudo nala install nvidia-cuda-toolkit -y
 fi
-CUDA=$(nvcc -V)
-if [ $? -eq 0 ]; then
+if command -v nvcc > /dev/null; then
     wget "$REPOSITORY_URL/gsr-nvidia.conf" -O "$HOME/Downloads/gsr-nvidia.conf" && sudo install -Dm644 "$HOME/Downloads/gsr-nvidia.conf" "/etc/modprobe.d/gsr-nvidia.conf" && rm "$HOME/Downloads/gsr-nvidia.conf"
 else
     sudo nala remove nvidia-cuda-toolkit -y
@@ -177,6 +182,7 @@ dconf write "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/cu
 # Setup replay autostart
 mkdir -p "$HOME/.config/autostart" && wget "$REPOSITORY_URL/start_replay.sh.desktop" -O "$HOME/.config/autostart/start_replay.sh.desktop" && sed -i '/Exec=/s/$/sh '${HOME//\//\\/}'\/Scripts\/start_replay.sh/' "$HOME/.config/autostart/start_replay.sh.desktop"
 
+tput ed
 neofetch
 
 echo "It is now highly recommended that you restart your system"
