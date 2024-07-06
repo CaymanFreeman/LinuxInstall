@@ -13,6 +13,7 @@ gsettings set org.gnome.shell.extensions.pop-cosmic overlay-key-action 'APPLICAT
 gsettings set org.gnome.shell.extensions.pop-cosmic show-workspaces-button false
 gsettings set org.gnome.shell.extensions.pop-cosmic show-applications-button false
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-alignment 'START'
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
 gsettings set org.gnome.desktop.background color-shading-type 'solid'
 gsettings set org.gnome.desktop.background picture-options 'zoom'
 gsettings set org.gnome.desktop.background picture-uri-dark 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
