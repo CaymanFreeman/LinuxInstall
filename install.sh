@@ -99,6 +99,17 @@ xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 # Set dash apps
 gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'com.brave.Browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'com.atlauncher.ATLauncher.desktop', 'com.spotify.Client.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop', 'noisetorch.desktop']"
 
+# GPU-Screen-Recorder CUDA fix
+if [[ $GPU_VENDORS == *"NVIDIA"* ]]; then
+    sudo nala install nvidia-cuda-toolkit -y
+fi
+CUDA=$(nvcc -V)
+if [ $? -eq 0 ]; then
+    wget "$REPOSITORY_URL/gsr-nvidia.conf" -O "$HOME/Downloads/gsr-nvidia.conf" && sudo install -Dm644 "$HOME/Downloads/gsr-nvidia.conf" "/etc/modprobe.d/gsr-nvidia.conf" && rm "$HOME/Downloads/gsr-nvidia.conf"
+else
+    sudo nala remove nvidia-cuda-toolkit -y
+fi
+
 # Create replay scripts
 mkdir -p "$HOME/Scripts"
 wget "$REPOSITORY_URL/save_replay.sh" -O "$HOME/Scripts/save_replay.sh" && chmod +x "$HOME/Scripts/save_replay.sh"
