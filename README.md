@@ -66,6 +66,11 @@ flatpak remove com.obsproject.Studio -y
 flatpak remove com.atlauncher.ATLauncher -y
 ```
 
+#### Uninstall ProtonUp-QT
+```
+flatpak remove net.davidotek.pupgui2 -y
+```
+
 #### Uninstall Brave Browser
 ```
 flatpak remove com.brave.Browser -y
