@@ -10,6 +10,8 @@ wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.s
 wget https://raw.githubusercontent.com/CaymanFreeman/LinuxInstall/main/install.sh -O install.sh && chmod +x install.sh && ./install.sh && sudo rm install.sh
 ```
 
+---
+
 #### Uninstall Steam Launcher
 ```
 sudo nala remove steam -y
