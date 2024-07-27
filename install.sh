@@ -61,15 +61,15 @@ flatpak update -y
 GPU_VENDORS=$(lspci | grep VGA | cut -d ' ' -f5)
 if [[ "$GPU_VENDORS" = *"NVIDIA"* ]] || [[ "$GPU_VENDORS" = *"AMD"* ]]; then
     flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
-    flatpak install --system com.dec05eba.gpu_screen_recorder -y
+    flatpak install --system flathub com.dec05eba.gpu_screen_recorder -y
 elif [[ "$GPU_VENDORS" = *"Intel"* ]] && [[ "$GPU_VENDORS" != *"NVIDIA"* ]] && [[ "$GPU_VENDORS" != *"AMD"* ]]; then
     flatpak remote-add --if-not-exists --system flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
-    flatpak install --system com.dec05eba.gpu_screen_recorder -y
+    flatpak install --system flathub com.dec05eba.gpu_screen_recorder -y
 else
     flatpak remote-add --if-not-exists --user flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
-    flatpak install --user com.dec05eba.gpu_screen_recorder -y
+    flatpak install --user flathub com.dec05eba.gpu_screen_recorder -y
 fi
-flatpak install --user io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher com.brave.Browser com.spotify.Client -y
+flatpak install --user flathub io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher com.brave.Browser com.spotify.Client net.davidotek.pupgui2 -y
 flatpak upgrade -y
 
 # Install NoiseTorch
