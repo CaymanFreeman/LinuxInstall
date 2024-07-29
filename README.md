@@ -68,6 +68,11 @@ flatpak remove com.obsproject.Studio -y
 flatpak remove com.atlauncher.ATLauncher -y
 ```
 
+#### Uninstall Minecraft Bedrock Launcher
+```
+flatpak remove io.mrarm.mcpelauncher -y
+```
+
 #### Uninstall ProtonUp-QT
 ```
 flatpak remove net.davidotek.pupgui2 -y
