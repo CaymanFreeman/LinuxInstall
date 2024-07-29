@@ -69,7 +69,7 @@ else
     flatpak remote-add --if-not-exists --user flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
     flatpak install --user flathub com.dec05eba.gpu_screen_recorder -y
 fi
-flatpak install --user flathub io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher com.brave.Browser com.spotify.Client net.davidotek.pupgui2 -y
+flatpak install --user flathub io.github.milkshiift.GoofCord xyz.xclicker.xclicker com.obsproject.Studio com.atlauncher.ATLauncher io.mrarm.mcpelauncher com.brave.Browser com.spotify.Client net.davidotek.pupgui2 -y
 flatpak upgrade -y
 
 # Install NoiseTorch
@@ -81,7 +81,7 @@ sudo setcap 'CAP_SYS_RESOURCE=+ep' "$HOME/.local/bin/noisetorch"
 gtk-update-icon-cache
 
 # Set dash apps
-gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'com.brave.Browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'com.atlauncher.ATLauncher.desktop', 'com.spotify.Client.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop', 'noisetorch.desktop']"
+gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'io.elementary.appcenter.desktop', 'nemo.desktop', 'gnome-control-center.desktop', 'org.gnome.Terminal.desktop', 'gyazo.desktop', 'com.brave.Browser.desktop', 'io.github.milkshiift.GoofCord.desktop', 'steam.desktop', 'com.atlauncher.ATLauncher.desktop', 'io.mrarm.mcpelauncher.desktop', 'com.spotify.Client.desktop', 'com.obsproject.Studio.desktop', 'xyz.xclicker.xclicker.desktop', 'noisetorch.desktop']"
 
 # Cleanup
 sudo nala autoremove -y
